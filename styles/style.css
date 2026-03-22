@@ -1,0 +1,57 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  transition: all 0.4s ease;
+}
+
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#clock {
+  font-size: 4rem;
+  font-weight: bold;
+}
+
+#date {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: transform 0.2s;
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
+body.light {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+body.light button {
+  background-color: #000;
+  color: #fff;
+}
+
+body.dark {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+body.dark button {
+  background-color: #fff;
+  color: #000;
+}
