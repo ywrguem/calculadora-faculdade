@@ -2,38 +2,46 @@ const clock = document.getElementById("clock");
 const dateEl = document.getElementById("date");
 const button = document.getElementById("toggleTheme");
 const body = document.body;
+const clouds = document.querySelector(".clouds");
 
-// Atualiza hora e data
 function updateTime() {
   const now = new Date();
 
-  // Hora
   const hours = String(now.getHours()).padStart(2, '0');
   const minutes = String(now.getMinutes()).padStart(2, '0');
   const seconds = String(now.getSeconds()).padStart(2, '0');
 
   clock.textContent = `${hours}:${minutes}:${seconds}`;
 
-  // Data
   const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
-  const formattedDate = now.toLocaleDateString('pt-BR', options);
-
-  dateEl.textContent = formattedDate;
+  dateEl.textContent = now.toLocaleDateString('pt-BR', options);
 }
 
-// Atualiza a cada segundo
 setInterval(updateTime, 1000);
 updateTime();
 
-// Alternar tema
 button.addEventListener("click", () => {
-  body.classList.toggle("dark");
-  body.classList.toggle("light");
+  const isDark = body.classList.contains("dark");
 
-  // Trocar ícone
-  if (body.classList.contains("dark")) {
-    button.textContent = "☀️";
-  } else {
-    button.textContent = "🌙";
-  }
+  body.classList.add("animating");
+
+  clouds.style.display = "flex";
+
+  setTimeout(() => {
+    if (isDark) {
+      body.classList.remove("dark");
+      body.classList.add("light");
+      button.textContent = "🌙";
+    } else {
+      body.classList.remove("light");
+      body.classList.add("dark");
+      button.textContent = "☀️";
+    }
+  }, 300);
+
+  setTimeout(() => {
+    body.classList.remove("animating");
+
+    clouds.style.display = "none";
+  }, 900);
 });

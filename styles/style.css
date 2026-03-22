@@ -1,7 +1,8 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  transition: all 0.4s ease;
+
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 .container {
@@ -10,6 +11,13 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+body.animating .container {
+  transform: scale(0.95);
+  opacity: 0.7;
 }
 
 #clock {
@@ -54,4 +62,74 @@ body.dark {
 body.dark button {
   background-color: #fff;
   color: #000;
+}
+
+.clouds {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  display: none;
+  justify-content: space-around;
+  align-items: center;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.cloud {
+  width: 200px;
+  height: 100px;
+  background: #ffffff;
+  border-radius: 50px;
+  position: relative;
+  opacity: 0.9;
+}
+
+.cloud::before,
+.cloud::after {
+  content: "";
+  position: absolute;
+  background: #ffffff;
+  border-radius: 50%;
+}
+
+.cloud::before {
+  width: 120px;
+  height: 120px;
+  top: -40px;
+  left: 20px;
+}
+
+.cloud::after {
+  width: 90px;
+  height: 90px;
+  top: -20px;
+  left: 80px;
+}
+
+body.animating.dark .clouds {
+  animation: cloudsIn 0.8s forwards ease-in-out;
+}
+
+body.animating.light .clouds {
+  animation: cloudsOut 0.8s forwards ease-in-out;
+}
+
+@keyframes cloudsIn {
+  from {
+    left: -100%;
+  }
+  to {
+    left: 0%;
+  }
+}
+
+@keyframes cloudsOut {
+  from {
+    left: 0%;
+  }
+  to {
+    left: 100%;
+  }
 }
